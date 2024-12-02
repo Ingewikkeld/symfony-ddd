@@ -1,0 +1,49 @@
+
+services:
+  php:
+    build:
+      dockerfile: "docker/dev/php/Dockerfile"
+    environment:
+      APP_ENV: "dev"
+    volumes:
+      - ".:/app:consistent"
+    depends_on:
+      - "database"
+
+  nginx:
+    image: nginx
+    build:
+      dockerfile: "docker/dev/nginx/Dockerfile"
+    ports:
+      - "80:80"
+      - "3043:443"
+    volumes:
+      - ".:/app:consistent"
+    depends_on:
+      - "php"
+
+###> doctrine/doctrine-bundle ###
+  database:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    ports:
+      - "5432:5432"
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+###< doctrine/doctrine-bundle ###
+
+volumes:
+###> doctrine/doctrine-bundle ###
+  database_data:
+###< doctrine/doctrine-bundle ###
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My blog{% endblock %}
+
+{% block body %}
+    <h1>My blog</h1>
+
+        {% for post in posts %}
+            <h2><a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.title }}</a></h2>
+            <div>
+                {{ post.content|slice(0, 250) }}...<br />
+                <a href="{{ path('app_post_show', {id: post.id}) }}">read more</a>
+            </div>
+            <p>Posted at {{ post.publicationDate ? post.publicationDate|date('Y-m-d H:i:s') : '' }}</p>
+        {% endfor %}
+{% endblock %}

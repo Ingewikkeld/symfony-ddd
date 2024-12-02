@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ post.title }}</h1>
+
+    <div>{{ post.content|nl2br }}</div>
+
+    <p>Posted at {{ post.publicationDate ? post.publicationDate|date('Y-m-d H:i:s') : '' }}</p>
+
+    <h2>Comment</h2>
+
+    {{ form(commentForm, {'action': path('app_comment_add', {'post': post.id})}) }}
+
+    <h2>Comments</h2>
+
+    {% for comment in post.comments %}
+        <p>{{ comment.comment }}<br />
+        by {{ comment.commenterName }}</p>
+    {% endfor %}
+{% endblock %}
