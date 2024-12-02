@@ -15,7 +15,7 @@
         <div>
             <a href="{{ path('app_post_index') }}">Home</a>
             {% if is_granted('ROLE_USER') %}
-                - <a href="{{ path('app_post_admin_index') }}">Post admin</a> - <a href="{{ path('app_comment_admin_index') }}">Comment admin</a> - <a href="{{ path('app_logout') }}">Log out</a>
+                - <a href="{{ path('app_post_admin_index') }}">Post admin</a> - <a href="{{ path('app_comment_admin_index') }}">Comment admin</a> - <a href="{{ path('app_user_admin_index') }}">User admin</a> - <a href="{{ path('app_logout') }}">Log out</a>
             {% endif %}
         </div>
         {% block body %}{% endblock %}
