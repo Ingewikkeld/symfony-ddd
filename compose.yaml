@@ -5,22 +5,12 @@ services:
       dockerfile: "docker/dev/php/Dockerfile"
     environment:
       APP_ENV: "dev"
+    ports:
+      - "8080:80"
     volumes:
       - ".:/app:consistent"
     depends_on:
       - "database"
-
-  nginx:
-    image: nginx
-    build:
-      dockerfile: "docker/dev/nginx/Dockerfile"
-    ports:
-      - "80:80"
-      - "3043:443"
-    volumes:
-      - ".:/app:consistent"
-    depends_on:
-      - "php"
 
 ###> doctrine/doctrine-bundle ###
   database:
