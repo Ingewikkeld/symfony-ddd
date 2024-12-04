@@ -1,29 +1,25 @@
 <?php
 
-namespace App\Form;
+namespace App\Management\User;
 
-use App\Entity\Post;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PostType extends AbstractType
+class UserEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('content')
-            ->add('publicationDate', null, [
-                'widget' => 'single_text',
-            ])
+            ->add('email')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Post::class,
+            'data_class' => User::class,
         ]);
     }
 }

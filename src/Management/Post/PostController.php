@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Management\Post;
 
 use App\Entity\Post;
-use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin/post')]
-final class PostAdminController extends AbstractController
+final class PostController extends AbstractController
 {
     #[Route(name: 'app_post_admin_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response

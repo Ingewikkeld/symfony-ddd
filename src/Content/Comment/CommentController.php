@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace App\Content\Comment;
 
+use App\Content\Post\CommentType;
 use App\Entity\Post;
-use App\Form\CommentType;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

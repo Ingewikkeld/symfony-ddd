@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Management\Comment;
 
 use App\Entity\Comment;
-use App\Form\Comment1Type;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +25,7 @@ final class CommentAdminController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $comment = new Comment();
-        $form = $this->createForm(Comment1Type::class, $comment);
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +52,7 @@ final class CommentAdminController extends AbstractController
     #[Route('/{id}/edit', name: 'app_comment_admin_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Comment1Type::class, $comment);
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
